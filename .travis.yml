@@ -1,0 +1,16 @@
+language: go
+go:
+  - 1.12.x
+  - master
+
+before_install:
+   - go get github.com/gorilla/mux
+   - go get github.com/stretchr/testify/assert
+
+install: true
+
+script:
+  - go build
+  - go test -v -coverprofile=coverage.txt -covermode=atomic
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
